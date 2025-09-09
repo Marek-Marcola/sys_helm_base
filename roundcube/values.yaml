@@ -1,0 +1,16 @@
+app: "roundcube"
+replicacount: 1
+
+mode: 0
+
+port: 8080
+nodeport: 0
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/roundcube
+  pullpolicy: "Always"
+
+envs: []
+vols: []
+mnts: []

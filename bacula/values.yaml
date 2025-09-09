@@ -1,0 +1,28 @@
+app: "bacula"
+replicacount: 1
+
+debug: 0
+
+port_dir: 9101
+port_fd:  9102
+port_sd:  9103
+nodeport_dir: 0
+nodeport_fd:  0
+nodeport_sd:  0
+
+bacula_dir: "0"
+bacula_fd:  "0"
+bacula_sd:  "0"
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/bacula
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/bacula"
+
+envs: []
+vols: []
+mnts: []

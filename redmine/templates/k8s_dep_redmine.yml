@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{ include "common.labels.meta" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicacount }}
+  selector:
+    matchLabels:
+{{ include "common.labels.match" . | indent 6 }}
+  strategy:
+    type: {{ .Values.strategytype }}
+  template:
+    metadata:
+      labels:
+{{ include "common.labels.meta" . | indent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.image.repository | trimPrefix "is/" }}
+          image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.pullpolicy }}
+          {{- if .Values.mode }}
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do date; sleep 666; done"]
+          {{- end }}
+          ports:
+            - containerPort: {{ .Values.port }}
+          env:
+{{- with .Values.envs }}
+{{ toYaml . | indent 12 }}
+{{- end }}
+          volumeMounts:
+            - name: etc-{{ .Release.Name }}
+              mountPath: /usr/local/etc/redmine
+              readOnly: true
+            - name: var-{{ .Release.Name }}
+              mountPath: /var/opt/redmine
+              readOnly: false
+{{- with .Values.mnts }}
+{{ toYaml . | indent 12 }}
+{{- end }}
+      volumes:
+        - name: etc-{{ .Release.Name }}
+          hostPath:
+            path: {{ .Values.base.etc }}/{{ .Release.Name }}
+            type: Directory
+        - name: var-{{ .Release.Name }}
+          hostPath:
+            path: {{ .Values.base.var }}/{{ .Release.Name }}
+            type: Directory
+{{- with .Values.vols }}
+{{ toYaml . | indent 8 }}
+{{- end }}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      enableServiceLinks: false

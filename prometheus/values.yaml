@@ -1,0 +1,19 @@
+app: "prometheus"
+replicacount: 1
+
+debug: 0
+nodeport: 0
+port: 9090
+
+opts: >-
+  --storage.tsdb.path=/var/opt/prometheus/data
+  --storage.tsdb.retention.time=30d
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/prometheus
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/prometheus"

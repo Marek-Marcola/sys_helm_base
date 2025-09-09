@@ -1,0 +1,15 @@
+app: "slurm-exporter"
+replicacount: 1
+strategytype: Recreate
+
+debug: 0
+port: 8080
+nodeport: 0
+nodepolicy: Cluster
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/slurm-exporter
+  pullPolicy: "Always"
+
+envs: []

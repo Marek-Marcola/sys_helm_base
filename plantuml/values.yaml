@@ -1,0 +1,13 @@
+app: "plantuml"
+replicacount: 1
+strategytype: RollingUpdate
+
+debug: 0
+port: 8080
+nodeport: 0
+nodepolicy: Cluster
+
+image:
+  registry: scr.dc.local
+  repository: is/plantuml
+  pullPolicy: "Always"

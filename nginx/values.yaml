@@ -1,0 +1,24 @@
+app: "nginx"
+replicacount: 1
+
+mode: 0
+init: 0
+
+port: 8080
+portssl: 8443
+nodeport: 0
+nodeportssl: 0
+nodepolicy: Cluster
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/nginx
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/nginx"
+
+envs: []
+vols: []
+mnts: []

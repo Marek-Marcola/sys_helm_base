@@ -1,0 +1,22 @@
+app: "openldap"
+replicacount: 1
+strategytype: Recreate
+
+debug: 0
+port: 389
+portssl: 636
+nodeport: 0
+nodeportssl: 0
+nodepolicy: Cluster
+loadbalancerip:
+
+image:
+  registry: scr.dc.local
+  repository: is/openldap
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/openldap"
+
+envs: []

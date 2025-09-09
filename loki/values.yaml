@@ -1,0 +1,19 @@
+app: "loki"
+replicacount: 1
+
+debug: 0
+nodeport: 0
+port: 3100
+
+opts: ""
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/loki
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/loki"
+
+envs: []

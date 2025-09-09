@@ -1,0 +1,17 @@
+app: "mariadb"
+replicacount: 1
+
+mode: 0
+init: 0
+
+port: 3306
+nodeport: 0
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/mariadb
+  pullpolicy: "Always"
+
+envs: []
+vols: []
+mnts: []

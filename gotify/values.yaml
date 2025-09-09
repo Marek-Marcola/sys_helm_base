@@ -1,0 +1,11 @@
+app: "gotify"
+replicacount: 1
+
+debug: 0
+nodeport: 0
+port: 8080
+
+image:
+  registry: scr.dc.local
+  repository: is/gotify
+  pullPolicy: "Always"

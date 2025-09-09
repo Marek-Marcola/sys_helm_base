@@ -1,0 +1,43 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cj-{{ .Release.Name }}
+  labels:
+{{ include "common.labels.meta" . | indent 4 }}
+spec:
+  schedule: {{ .Values.cj.schedule | quote }}
+  suspend: {{ .Values.cj.suspend }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: {{ .Values.image.repository | trimPrefix "is/" }}
+              image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              args:
+                - freshclam
+              volumeMounts:
+                - name: etc-{{ .Release.Name }}
+                  mountPath: /usr/local/etc/clamav
+                  readOnly: true
+                - name: var-{{ .Release.Name }}
+                  mountPath: /var/opt/clamav
+                  readOnly: false
+          volumes:
+            - name: etc-{{ .Release.Name }}
+              hostPath:
+                path: /usr/local/etc/{{ .Release.Name }}
+                type: Directory
+            - name: var-{{ .Release.Name }}
+              hostPath:
+                path: /var/opt/clamav/{{ .Release.Name }}
+                type: Directory
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          automountServiceAccountToken: false
+          enableServiceLinks: false

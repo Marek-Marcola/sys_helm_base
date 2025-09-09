@@ -1,0 +1,21 @@
+app: "netxms-server"
+replicacount: 1
+
+debug: 0
+nodeport: 0
+port: 4701
+
+opts: ""
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/netxms-server
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/netxms"
+
+envs:
+  - name: NETXMS_INIT
+    value: ""

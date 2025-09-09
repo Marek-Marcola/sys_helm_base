@@ -1,0 +1,19 @@
+app: "clamav"
+replicacount: 1
+
+debug: 0
+port: 3310
+nodeport: 0
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/clamav
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/clamav"
+
+cj:
+  schedule: "0 * * * *"
+  suspend: false

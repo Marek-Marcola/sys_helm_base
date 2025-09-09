@@ -1,0 +1,17 @@
+app: "promtail"
+
+debug: 0
+nodeport: 0
+port: 9080
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/promtail
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+
+envs: []
+vols: []
+mnts: []

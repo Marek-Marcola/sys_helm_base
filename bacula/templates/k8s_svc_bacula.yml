@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-{{ .Release.Name }}
+  labels:
+{{ include "common.labels.meta" . | indent 4 }}
+spec:
+  {{- if or .Values.nodeport_dir .Values.nodeport_fd .Values.nodeport_sd }}
+  type: NodePort
+  {{- else }}
+  type: ClusterIP
+  {{- end }}
+  selector:
+{{ include "common.labels.match" . | indent 4 }}
+  ports:
+    - name: bacula-dir
+      protocol: TCP
+      port: {{ .Values.port_dir }}
+      targetPort: {{ .Values.port_dir }}
+      {{- if .Values.nodeport_dir }}
+      nodePort: {{ .Values.nodeport_dir }}
+      {{- end }}
+    - name: bacula-fd
+      protocol: TCP
+      port: {{ .Values.port_fd }}
+      targetPort: {{ .Values.port_fd }}
+      {{- if .Values.nodeport_fd }}
+      nodePort: {{ .Values.nodeport_fd }}
+      {{- end }}
+    - name: bacula-sd
+      protocol: TCP
+      port: {{ .Values.port_sd }}
+      targetPort: {{ .Values.port_sd }}
+      {{- if .Values.nodeport_sd }}
+      nodePort: {{ .Values.nodeport_sd }}
+      {{- end }}

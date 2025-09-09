@@ -1,0 +1,23 @@
+app: "envoy"
+replicacount: 1
+strategytype: RollingUpdate
+
+debug: 0
+port: 8080
+portssl: 8443
+portadmin: 15000
+nodeport: 0
+nodeportssl: 0
+nodeportadmin: 0
+nodepolicy: Cluster
+loadbalancerip:
+
+image:
+  registry: scr.dc.local
+  repository: is/envoy
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+
+envs: []

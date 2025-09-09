@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{ include "common.labels.meta" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicacount }}
+  selector:
+    matchLabels:
+{{ include "common.labels.match" . | indent 6 }}
+  strategy:
+    type: {{ .Values.strategytype }}
+  template:
+    metadata:
+      labels:
+{{ include "common.labels.meta" . | indent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.image.repository | trimPrefix "is/" }}
+          image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.debug }}
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do date; sleep 60; done"]
+          {{- end }}
+          ports:
+            - containerPort: {{ .Values.port }}
+          env:
+{{- with .Values.envs }}
+{{ toYaml . | indent 12 }}
+{{- end }}
+          volumeMounts:
+            - name: var-{{ .Release.Name }}
+              mountPath: /var/opt/nexus3
+              readOnly: false
+      volumes:
+        - name: var-{{ .Release.Name }}
+          hostPath:
+            path: {{ .Values.base.var }}/{{ .Release.Name }}
+            type: Directory
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      enableServiceLinks: false

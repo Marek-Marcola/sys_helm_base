@@ -1,0 +1,20 @@
+app: "haproxy"
+replicacount: 1
+strategytype: Recreate
+
+debug: 0
+port: 8080
+portssl: 8443
+nodeport: 0
+nodeportssl: 0
+nodepolicy: Cluster
+
+image:
+  registry: scr.dc.local
+  repository: is/haproxy
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+
+extraenv: []

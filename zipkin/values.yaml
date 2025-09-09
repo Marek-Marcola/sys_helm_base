@@ -1,0 +1,13 @@
+app: "zipkin"
+replicacount: 1
+
+debug: 0
+nodeport: 0
+port: 9411
+
+image:
+  registry: scr.dc.local
+  repository: is/zipkin
+  pullPolicy: "Always"
+
+extraenv: []

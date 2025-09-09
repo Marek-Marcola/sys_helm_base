@@ -1,0 +1,14 @@
+app: "asterisk"
+replicacount: 1
+
+debug: 0
+init: "no"
+
+image:
+  registry: scr.dc.local
+  repository: is/asterisk
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/asterisk"

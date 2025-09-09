@@ -1,0 +1,17 @@
+app: "hypatia"
+
+clamav_id: "ap-clamav"
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/hypatia
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/hypatia"
+  cav: "/var/opt/clamav"
+
+cj:
+  schedule: "30 * * * *"
+  suspend: false

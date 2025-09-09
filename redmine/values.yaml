@@ -1,0 +1,26 @@
+app: "redmine"
+replicacount: 1
+strategytype: Recreate
+
+mode: 0
+
+port: 3000
+nodeport: 0
+nodepolicy: Cluster
+loadbalancerip:
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/redmine
+  pullpolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/redmine"
+
+envs:
+  - name: REDMINE_SUBURI
+    value: "/redmine"
+
+vols: []
+mnts: []

@@ -1,0 +1,20 @@
+app: "guacamole-server"
+replicacount: 1
+strategytype: Recreate
+
+mode: 0
+
+port: 4822
+nodeport: 0
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/guacamole-server
+  pullpolicy: "Always"
+
+envs:
+  - name: GUACD_LOG
+    value: "debug"
+
+vols: []
+mnts: []

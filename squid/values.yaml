@@ -1,0 +1,18 @@
+app: "squid"
+replicacount: 1
+strategytype: Recreate
+
+debug: 0
+port: 3128
+nodeport: 0
+nodepolicy: Cluster
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/squid
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+
+envs: []

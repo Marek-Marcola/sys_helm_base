@@ -1,0 +1,48 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cj-{{ .Release.Name }}
+  labels:
+{{ include "common.labels.meta" . | indent 4 }}
+spec:
+  schedule: {{ .Values.cj.schedule | quote }}
+  suspend: {{ .Values.cj.suspend }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: {{ .Values.image.repository | trimPrefix "is/" }}
+              image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              volumeMounts:
+                - name: etc-gpg
+                  mountPath: /usr/local/etc/gpg
+                  readOnly: false
+                - name: var-{{ .Release.Name }}
+                  mountPath: /var/opt/hypatia
+                  readOnly: false
+                - name: var-{{ .Values.clamav_id }}
+                  mountPath: /var/opt/clamav
+                  readOnly: true
+          volumes:
+            - name: etc-gpg
+              hostPath:
+                path: {{ .Values.base.etc }}/gpg
+                type: Directory
+            - name: var-{{ .Release.Name }}
+              hostPath:
+                path: {{ .Values.base.var }}/{{ .Release.Name }}
+                type: Directory
+            - name: var-{{ .Values.clamav_id }}
+              hostPath:
+                path: {{ .Values.base.cav }}/{{ .Values.clamav_id }}
+                type: Directory
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          automountServiceAccountToken: false
+          enableServiceLinks: false

@@ -1,0 +1,13 @@
+app: "jaeger"
+replicacount: 1
+
+debug: 0
+nodeport: 0
+port: 16686
+
+image:
+  registry: scr.dc.local
+  repository: is/jaeger
+  pullPolicy: "Always"
+
+extraenv: []

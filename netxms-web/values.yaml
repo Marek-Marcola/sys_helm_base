@@ -1,0 +1,20 @@
+app: "netxms-web"
+replicacount: 1
+strategytype: Recreate
+
+debug: 0
+port: 8080
+portssl: 8443
+nodeport: 0
+nodeportssl: 0
+nodepolicy: Cluster
+loadbalancerip:
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/netxms-web
+  pullPolicy: "Always"
+
+envs:
+  - name: JAVA_OPTS
+    value: "-Dnxmc.server=127.0.0.1:4701 -Dnxmc.logfile=/tmp/nxmc.log"

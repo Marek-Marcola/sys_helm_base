@@ -1,0 +1,11 @@
+app: "node-exporter"
+
+debug: 0
+hostport: 0
+
+opts: --opts.k8s
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/node-exporter
+  pullPolicy: "Always"

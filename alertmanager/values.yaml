@@ -1,0 +1,19 @@
+app: "alertmanager"
+replicacount: 1
+
+debug: 0
+nodeport: 0
+port: 9093
+
+opts: >-
+  --storage.path=/var/opt/alertmanager/data
+  --data.retention.time=30d
+
+image:
+  registry: scr.dc.local
+  repository: is/alertmanager
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/alertmanager"

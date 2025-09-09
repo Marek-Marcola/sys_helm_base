@@ -1,0 +1,19 @@
+app: "ssp"
+replicacount: 1
+
+debug: 0
+nodeport: 0
+port: 8080
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/ssp
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/nginx"
+
+envs:
+  - name: NGINX_INIT
+    value: "0"

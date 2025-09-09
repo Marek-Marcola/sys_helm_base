@@ -1,0 +1,23 @@
+app: "nagios"
+replicacount: 1
+
+debug: 0
+port: 8080
+nodeport: 0
+nodepolicy: Cluster
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/nagios
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/nagios"
+  www: "/var/opt/nginx"
+
+envs:
+  - name: NGINX_PHP
+    value: "1"
+  - name: NGINX_CGI
+    value: "1"

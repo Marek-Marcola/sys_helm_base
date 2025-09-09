@@ -1,0 +1,14 @@
+app: "hmdm"
+replicacount: 1
+
+debug: 0
+port: 8080
+portmqtt: 31000
+nodeport: 0
+nodeportmqtt: 0
+nodepolicy: Cluster
+
+image:
+  registry: scr.dc.local
+  repository: is/hmdm
+  pullPolicy: "Always"

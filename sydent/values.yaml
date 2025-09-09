@@ -1,0 +1,12 @@
+app: "sydent"
+replicacount: 1
+strategytype: Recreate
+
+debug: 0
+port: 8090
+nodeport: 0
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/sydent
+  pullPolicy: "Always"

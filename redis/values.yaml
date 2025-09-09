@@ -1,0 +1,14 @@
+app: "redis"
+replicacount: 1
+
+debug: 0
+nodeport: 0
+port: 6379
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/redis
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"

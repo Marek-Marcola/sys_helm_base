@@ -1,0 +1,16 @@
+app: "synapse"
+replicacount: 1
+strategytype: Recreate
+
+debug: 0
+port: 8008
+nodeport: 0
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/synapse
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/synapse"

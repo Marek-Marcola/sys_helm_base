@@ -1,0 +1,22 @@
+app: "nexus"
+replicacount: 1
+strategytype: Recreate
+
+debug: 0
+port: 8081
+portssl: 8443
+nodeport: 0
+nodeportssl: 0
+nodepolicy: Cluster
+loadbalancerip:
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/nexus
+  pullPolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/nexus"
+
+envs: []

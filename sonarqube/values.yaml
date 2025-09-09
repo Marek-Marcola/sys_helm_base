@@ -1,0 +1,20 @@
+app: "sonarqube"
+replicacount: 1
+
+mode: 0
+
+port: 9000
+nodeport: 0
+
+image:
+  registry: scr.dc.local:5443
+  repository: is/sonarqube
+  pullpolicy: "Always"
+
+base:
+  etc: "/usr/local/etc"
+  var: "/var/opt/sonarqube"
+
+envs: []
+vols: []
+mnts: []
