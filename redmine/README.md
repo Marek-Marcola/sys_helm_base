@@ -3,20 +3,20 @@ redmine
 
 Deploy
 ------
-Info:
+Deploy
+------
+hman env:
 
-    helm repo update
-    helm show readme scm/redmine
-    helm show values scm/redmine
-
-Install/upgrade:
-
-    V=x.y.z
-    helm diff upgrade ap-redmine scm/redmine --version=$V -n ns-redmine -f values-ap-redmine.yaml --install
-    helm upgrade ap-redmine scm/redmine --version=$V -n ns-redmine -f values-ap-redmine.yaml -i \
-      --create-namespace --wait --dry-run
-
-Verify:
-
-    helm list -A
-    helm history ap-redmine -n ns-redmine
+    # cat /usr/local/etc/hman.d/ap-redmine-dc1
+    : ${V:=m.m.p}
+    : ${C:=scm/redmine}
+    : ${N:=ns-redmine}
+    OPTS=(
+    --set nodeport=4081
+    --set envs[0].name=REDMINE_SUBURI
+    --set envs[0].value=/redmine/dc1
+    )
+    INIT=(
+     "install -m 755 -o root -g root -v -d /usr/local/etc/$A"
+     "install -m 755 -o 300  -g 300  -v -d /var/opt/redmine/$A"
+    )
