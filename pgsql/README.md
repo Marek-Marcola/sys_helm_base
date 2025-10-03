@@ -3,20 +3,15 @@ pgsql
 
 Deploy
 ------
-Info:
+hman env:
 
-    helm repo update
-    helm show readme scm/pgsql
-    helm show values scm/pgsql
-
-Install/upgrade:
-
-    V=x.y.z
-    helm diff upgrade pg-mx scm/pgsql --version=$V -n ns-matrix -f values-pg-mx.yaml --install
-    helm upgrade pg-mx scm/pgsql --version=$V -n ns-matrix -f values-pg-mx.yaml -i \
-      --create-namespace --wait --dry-run
-
-Verify:
-
-    helm list -A
-    helm history pg-mx -n ns-matrix
+    # cat /usr/local/etc/hman.d/ap-pgsql-sonarqube-dc1
+    : ${V:=m.m}
+    : ${C:=scm/pgsql}
+    : ${N:=ns-sonarqube}
+    OPTS=(
+    --set nodeport=5466
+    --set init=no
+    --set envs[0].name=PGSQL_DB
+    --set envs[0].value=sonarqube
+    )
