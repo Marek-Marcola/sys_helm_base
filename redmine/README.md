@@ -3,8 +3,6 @@ redmine
 
 Deploy
 ------
-Deploy
-------
 hman env:
 
     # cat /usr/local/etc/hman.d/ap-redmine-dc1
