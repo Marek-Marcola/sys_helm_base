@@ -3,20 +3,12 @@ asterisk
 
 Deploy
 ------
-Info:
+hman env:
 
-    helm repo update
-    helm show readme scm/asterisk
-    helm show values scm/asterisk
-
-Install/upgrade:
-
-    V=x.y.z
-    helm diff upgrade ap-asterisk-mcp scm/asterisk --version=$V -n ns-asterisk -f values-ap-asterisk-mcp.yaml --install
-    helm upgrade ap-asterisk-mcp scm/asterisk --version=$V -n ns-asterisk -f values-ap-asterisk-mcp.yaml -i \
-      --create-namespace --wait --dry-run
-
-Verify:
-
-    helm list -A
-    helm history ap-asterisk-mcp -n ns-asterisk
+    # cat /usr/local/etc/hman.d/ap-asterisk-dc1
+    : ${V:=m.m.p}
+    : ${C:=scm/asterisk}
+    : ${N:=ns-asterisk}
+    OPTS=(
+    --set mode=0
+    )
