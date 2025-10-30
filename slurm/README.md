@@ -24,7 +24,6 @@ hman env:
     --set mnts[1].readOnly=true
     )
     INIT=(
-     "install -m 755 -o root -g root -v -d /usr/local/etc/ap-munge-dc1"
      "install -m 755 -o root -g root -v -d /usr/local/etc/$A"
      "install -m 755 -o slurm -g slurm -v -d /var/opt/slurm/$A"
      "install -m 755 -o slurm -g slurm -v -d /var/opt/slurm/$A/jobcomp"
