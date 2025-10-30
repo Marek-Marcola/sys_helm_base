@@ -1,11 +1,11 @@
 app: "asterisk"
 replicacount: 1
 
-debug: 0
+mode: 0
 init: "no"
 
 image:
-  registry: scr.dc.local
+  registry: scr.dc.local:5443
   repository: is/asterisk
   pullPolicy: "Always"
 
