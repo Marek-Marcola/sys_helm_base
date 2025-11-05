@@ -3,20 +3,19 @@ wordpress
 
 Deploy
 ------
-Info:
+hman env:
 
-    helm repo update
-    helm show readme scm/wordpress
-    helm show values scm/wordpress
-
-Install/upgrade:
-
-    V=x.y.z
-    helm diff upgrade ap-wordpress scm/wordpress --version=$V -n ns-wordpress -f values-ap-wordpress.yaml --install
-    helm upgrade ap-wordpress scm/wordpress --version=$V -n ns-wordpress -f values-ap-wordpress.yaml -i \
-      --create-namespace --wait --dry-run
-
-Verify:
-
-    helm list -A
-    helm history ap-wordpress -n ns-wordpress
+    # cat /usr/local/etc/hman.d/ap-wordpress-dc1
+    : ${V:=m.m.p}
+    : ${C:=scm/wordpress}
+    : ${N:=ns-wordpress}
+    OPTS=(
+    --set nodeport=8088
+    --set nodepolicy=Local
+    --set envs[0].name=NGINX_INIT
+    --set envs[0].value=no
+    )
+    INIT=(
+     "install -m 755 -o root -g root -v -d /var/opt/wordpress/$A"
+     "install -m 755 -o root -g root -v -d /var/opt/nginx/$A"
+    )
