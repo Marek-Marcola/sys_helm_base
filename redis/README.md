@@ -3,20 +3,15 @@ redis
 
 Deploy
 ------
-Info:
+hman env:
 
-    helm repo update
-    helm show readme scm/redis
-    helm show values scm/redis
-
-Install/upgrade:
-
-    V=x.y.z
-    helm diff upgrade db-redis-dc1 scm/redis --version=$V -n ns-redis -f values-ap-redis-dc1.yaml --install
-    helm upgrade db-redis-dc1 scm/redis --version=$V -n ns-redis -f values-ap-redis-dc1.yaml -i \
-      --create-namespace --wait --dry-run
-
-Verify:
-
-    helm list -A
-    helm history db-redis-dc1 -n ns-redis
+    # cat /usr/local/etc/hman.d/db-redis-dc1
+    : ${V:=m.m.p}
+    : ${C:=scm/redis}
+    : ${N:=ns-redis}
+    OPTS=(
+    --set nodeport=6379
+    )
+    INIT=(
+     "install -m 755 -o root -g root -v -d /usr/local/etc/$A"
+    )
