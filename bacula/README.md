@@ -3,20 +3,28 @@ bacula
 
 Deploy
 ------
-Info:
+hman env:
 
-    helm repo update
-    helm show readme scm/bacula
-    helm show values scm/bacula
-
-Install/upgrade:
-
-    V=x.y.z
-    helm diff upgrade ap-bacula scm/bacula --version=$V -n ns-bacula -f values-ap-bacula.yaml --install
-    helm upgrade ap-bacula scm/bacula --version=$V -n ns-bacula -f values-ap-bacula.yaml -i \
-      --create-namespace --wait --dry-run
-
-Verify:
-
-    helm list -A
-    helm history ap-bacula -n ns-bacula
+    # cat /usr/local/etc/hman.d/ap-bacula-dc1
+    : ${V:=m.m.p}
+    : ${C:=scm/bacula}
+    : ${N:=ns-bacula}
+    OPTS=(
+    --set nodeport_dir=9101
+    --set nodeport_fd=9102
+    --set nodeport_sd=9103
+    --set bacula_dir=1
+    --set bacula_fd=1
+    --set bacula_sd=1
+    --set vols[0].name=var-backup-bacula
+    --set vols[0].hostPath.path=/vol/v01/var/backup/bacula
+    --set vols[0].hostPath.type=Directory
+    --set mnts[0].name=var-backup-bacula
+    --set mnts[0].mountPath=/var/backup/bacula
+    --set mnts[0].readOnly=false
+    )
+    INIT=(
+     "install -m 755 -o root -g root -v -d /usr/local/etc/$A"
+     "install -m 755 -o root -g root -v -d /var/opt/bacula/$A"
+     "install -m 755 -o root -g root -v -d /vol/v01/var/backup/bacula"
+    )
