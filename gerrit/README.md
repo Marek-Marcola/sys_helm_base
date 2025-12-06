@@ -3,20 +3,17 @@ gerrit
 
 Deploy
 ------
-Info:
+hman env:
 
-    helm repo update
-    helm show readme scm/gerrit
-    helm show values scm/gerrit
-
-Install/upgrade:
-
-    V=x.y.z
-    helm diff upgrade ap-gerrit scm/gerrit --version=$V -n ns-gerrit -f values-ap-gerrit.yaml --install
-    helm upgrade ap-gerrit scm/gerrit --version=$V -n ns-gerrit -f values-ap-gerrit.yaml -i \
-      --create-namespace --wait --dry-run
-
-Verify:
-
-    helm list -A
-    helm history ap-gerrit -n ns-gerrit
+    # cat /usr/local/etc/hman.d/ap-gerrit-dc1
+    : ${V:=m.m.p}
+    : ${C:=scm/gerrit}
+    : ${N:=ns-gerrit}
+    OPTS=(
+    --set nodeport=8084
+    --set nodeportssh=31418
+    --set init=no
+    )
+    INIT=(
+     "install -m 755 -o 701 -g 701 -v -d /var/opt/gerrit/$A"
+    )
