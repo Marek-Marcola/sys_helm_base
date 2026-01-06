@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullpolicy }}
           {{- if .Values.mode }}
           command: ["/bin/sh"]
-          args: ["-c", "while true; do date; sleep 60; done"]
+          args: ["-c", "while true; do date; sleep 666; done"]
           {{- end }}
           env:
             - name: PGSQL_DBCL
