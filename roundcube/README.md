@@ -17,8 +17,8 @@ hman env:
     INIT=(
      "install -m 755 -o root -g root -v -d /usr/local/etc/$A"
      "install -m 755 -o root -g root -v -d /var/opt/nginx/$A"
-     "install -m 755 -o 666 -g 666 -v -d /var/opt/roundcube/$A"
-     "install -m 755 -o 666 -g 666 -v -d /var/opt/roundcube/$A/logs"
-     "install -m 755 -o 666 -g 666 -v -d /var/opt/roundcube/$A/temp"
-     "install -m 755 -o 666 -g 666 -v -d /var/opt/sqlite/data/$A"
+     "install -m 755 -o none -g none -v -d /var/opt/$APN/$A"
+     "install -m 755 -o none -g none -v -d /var/opt/$APN/$A/logs"
+     "install -m 755 -o none -g none -v -d /var/opt/$APN/$A/temp"
+     "install -m 755 -o none -g none -v -d /var/opt/sqlite/data/$A"
     )
