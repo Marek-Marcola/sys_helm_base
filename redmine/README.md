@@ -16,5 +16,5 @@ hman env:
     )
     INIT=(
      "install -m 755 -o root -g root -v -d /usr/local/etc/$A"
-     "install -m 755 -o 300  -g 300  -v -d /var/opt/redmine/$A"
+     "install -m 755 -o 300  -g 300  -v -d /var/opt/$APN/$A"
     )
