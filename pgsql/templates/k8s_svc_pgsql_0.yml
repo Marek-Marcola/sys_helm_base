@@ -10,6 +10,7 @@ spec:
   type: ClusterIP
   {{- else }}
   type: NodePort
+  externalTrafficPolicy: {{ .Values.nodepolicy }}
   {{- end }}
   selector:
     app.kubernetes.io/name: {{ .Values.app }}

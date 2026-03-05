@@ -6,6 +6,7 @@ init: 0
 
 port: 5432
 nodeport: 0
+nodepolicy: Cluster
 
 image:
   registry: scr.dc.local:5443
