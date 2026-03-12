@@ -3,20 +3,17 @@ sonarqube
 
 Deploy
 ------
-Info:
+hman env:
 
-    helm repo update
-    helm show readme scm/sonarqube
-    helm show values scm/sonarqube
-
-Install/upgrade:
-
-    V=x.y.z
-    helm diff upgrade ap-sonarqube scm/sonarqube --version=$V -n ns-sonarqube -f values-ap-sonarqube.yaml --install
-    helm upgrade ap-sonarqube scm/sonarqube --version=$V -n ns-sonarqube -f values-ap-sonarqube.yaml -i \
-      --create-namespace --wait --dry-run
-
-Verify:
-
-    helm list -A
-    helm history ap-sonarqube -n ns-sonarqube
+    # cat /usr/local/etc/hman.d/ap-sonarqube-dc1
+    : ${V:=m.m.p}
+    : ${C:=scm/sonarqube}
+    : ${N:=ns-sonarqube}
+    OPTS=(
+    --set nodeport=8092
+    )
+    INIT=(
+     "install -m 755 -o root -g root -v -d /usr/local/etc/$A"
+     "install -m 755 -o 435 -g 435 -v -d /var/opt/$APN/$A"
+     "install -m 755 -o 435 -g 435 -v -d /var/opt/$APN/$A/extensions"
+    )
