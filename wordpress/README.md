@@ -16,6 +16,6 @@ hman env:
     --set envs[0].value=no
     )
     INIT=(
-     "install -m 755 -o root -g root -v -d /var/opt/wordpress/$A"
+     "install -m 755 -o root -g root -v -d /var/opt/$APN/$A"
      "install -m 755 -o root -g root -v -d /var/opt/nginx/$A"
     )
