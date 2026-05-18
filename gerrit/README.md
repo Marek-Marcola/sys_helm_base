@@ -6,7 +6,7 @@ Deploy
 hman env:
 
     # cat /usr/local/etc/hman.d/ap-gerrit-dc1
-    : ${V:=m.m.p}
+    : ${V:=x.y.z}
     : ${C:=scm/gerrit}
     : ${N:=ns-gerrit}
     OPTS=(
