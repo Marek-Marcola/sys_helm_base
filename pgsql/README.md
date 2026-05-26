@@ -6,7 +6,7 @@ Deploy
 hman env:
 
     # cat /usr/local/etc/hman.d/ap-pgsql-sonarqube-dc1
-    : ${V:=m.m}
+    : ${V:=x.y.z}
     : ${C:=scm/pgsql}
     : ${N:=ns-sonarqube}
     OPTS=(
