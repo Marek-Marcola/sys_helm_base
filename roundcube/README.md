@@ -6,7 +6,7 @@ Deploy
 hman env:
 
     # cat /usr/local/etc/hman.d/ap-roundcube-dc1
-    : ${V:=m.m.p}
+    : ${V:=x.y.z}
     : ${C:=scm/roundcube}
     : ${N:=ns-roundcube}
     OPTS=(
