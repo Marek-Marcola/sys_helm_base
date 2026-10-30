@@ -6,7 +6,7 @@ Deploy
 hman env:
 
     # cat /usr/local/etc/hman.d/ap-wordpress-dc1
-    : ${V:=m.m.p}
+    : ${V:=x.y.z}
     : ${C:=scm/wordpress}
     : ${N:=ns-wordpress}
     OPTS=(
