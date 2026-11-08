@@ -5,7 +5,7 @@ Deploy
 ------
 hman env:
 
-    # cat /usr/local/etc/hman.d/ap-gerrit-dc1
+    # cat /usr/local/etc/hman.d/c-gerrit-dc1
     : ${V:=x.y.z}
     : ${C:=scm/gerrit}
     : ${N:=ns-gerrit}
