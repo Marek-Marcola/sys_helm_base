@@ -1,4 +1,4 @@
 helm base
 =========
 
-Helm base charts.
+Base helm charts.
